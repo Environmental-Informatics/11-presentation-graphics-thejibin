@@ -152,7 +152,9 @@ if __name__ == '__main__':
                 
             if type_met=='Monthly':
                 ## Create monthly dataframe
+                
                 monthly = ReadDataDF[type_met][ReadDataDF[type_met]['Station']==file]
+                MonthlyAverages2=monthly.groupby(by=[monthly.index.month]).mean()
                 ## Annual monthly average values
                 cols=['Mean Flow']
                 m=[3,4,5,6,7,8,9,10,11,0,1,2]
@@ -164,8 +166,8 @@ if __name__ == '__main__':
                     index+=1
                 ## Plot Annual Average Monthly values
                 plt.figure(5)
-                plt.scatter(MonthlyAverages.index.values, 
-                         MonthlyAverages['Mean Flow'].values, 
+                plt.scatter(MonthlyAverages2.index.values, 
+                         MonthlyAverages2['Mean Flow'].values, 
                          label=riverName[file], color=color[file])
     ## Adding title,legend,label
     plt.figure(1)
@@ -215,7 +217,7 @@ if __name__ == '__main__':
     plt.xlabel('Month')
     plt.tight_layout()
     plt.savefig('Average_Annual_Monthly_Flow.png', dpi = 96)
-    plt.close(5)
+    #plt.close(5)
     
     ## Adding title,legend,label
     plt.figure(6)
